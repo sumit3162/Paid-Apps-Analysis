@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revenue vs Installs - Paid Apps</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 20px;
+      padding: 10px;
+      background: linear-gradient(to right, #f9f9f9, #e8f0ff);
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto 60px auto;
+      max-width: 100%;
+      height: auto !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h2>Scatter Plot: Revenue vs Installs (Paid Apps)</h2>
+  <canvas id="scatterChart" width="800" height="400"></canvas>
+
+  <h2>Bar Chart: Total Revenue by Category</h2>
+  <canvas id="barChart" width="800" height="400"></canvas>
+
+  <footer>
+    Created by Sumit Patil
+  </footer>
+
+  <script>
+    const scatterData = {
+      datasets: [
+        {
+          label: 'Photography',
+          data: [ { x: 45000, y: 270000 }, { x: 120000, y: 720000 } ],
+          backgroundColor: 'rgba(255, 99, 132, 0.6)'
+        },
+        {
+          label: 'Music',
+          data: [ { x: 100000, y: 500000 } ],
+          backgroundColor: 'rgba(54, 162, 235, 0.6)'
+        },
+        {
+          label: 'Health',
+          data: [ { x: 60000, y: 300000 } ],
+          backgroundColor: 'rgba(75, 192, 192, 0.6)'
+        }
+      ]
+    };
+
+    const scatterConfig = {
+      type: 'scatter',
+      data: scatterData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Installs'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Revenue'
+            }
+          }
+        }
+      }
+    };
+
+    const barData = {
+      labels: ['Photography', 'Music', 'Health', 'Education', 'Tools'],
+      datasets: [{
+        label: 'Total Revenue',
+        data: [720000, 500000, 300000, 280000, 250000],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(153, 102, 255, 0.6)'
+        ]
+      }]
+    };
+
+    const barConfig = {
+      type: 'bar',
+      data: barData,
+      options: {
+        responsive: true,
+        indexAxis: 'y',
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Total Revenue'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Category'
+            }
+          }
+        }
+      }
+    };
+
+    new Chart(document.getElementById('scatterChart'), scatterConfig);
+    new Chart(document.getElementById('barChart'), barConfig);
+  </script>
+</body>
+</html>
+
